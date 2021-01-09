@@ -23,7 +23,7 @@ export default function Marquee() {
 
   return (
     <div className="w-full bg-blue-100 ">
-      <form className="flex flex-col">
+      <form className="flex flex-col bg-red-100">
         <input
           className="bg-gray-200 shadow-inner rounded-l p-2 flex-1"
           id="text"
