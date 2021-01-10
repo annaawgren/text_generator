@@ -21,7 +21,7 @@ export default function Home() {
             src="/images/draikewglasses.png"
           />
         </div>
-        <h1 className="text-4xl">Job Application Generator</h1>
+        <h1 className="text-4xl">DrAIke rapplication</h1>
 
         <HostedModel />
       </main>

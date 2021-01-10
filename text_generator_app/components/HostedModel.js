@@ -15,7 +15,7 @@ export default function HostModel() {
     console.log("handleSubmit");
     //värde att fråga model efter
     console.log("inskriven text: ", inputText);
-    model.query({ prompt: inputText, max_characters: 1000 }).then((result) => {
+    model.query({ prompt: inputText, max_characters: 1500 }).then((result) => {
       console.log(result);
       setGeneratedText(result.generated_text);
     });
@@ -29,9 +29,10 @@ export default function HostModel() {
           id="text"
           type="text"
           value={inputText}
-          placeholder="Enter a message"
+          placeholder="enter text here"
           onChange={(e) => setInputText(e.target.value)}
         />
+
         <button
           className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r"
           type="button"
