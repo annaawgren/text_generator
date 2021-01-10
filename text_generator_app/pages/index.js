@@ -10,12 +10,17 @@ export default function Home() {
       </Head>
 
       <header className="w-full flex flex-row justify-between items-justify">
-        <div>logo</div>
+        <div>drAIke</div>
         <div>menu</div>
       </header>
 
       <main className="text-center">
-        <div className="w-full h-96 bg-red-300">Illustration</div>
+        <div className="w-full h-96 flex items-center">
+          <img
+            className="w-full h-32 object-contain drake"
+            src="/images/draikewglasses.png"
+          />
+        </div>
         <h1 className="text-4xl">Job Application Generator</h1>
 
         <HostedModel />
@@ -33,6 +38,20 @@ export default function Home() {
 
         * {
           box-sizing: border-box;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        .drake:hover {
+          animation: spin 1s ease-in-out infinte;
+          background: red;
         }
       `}</style>
     </div>

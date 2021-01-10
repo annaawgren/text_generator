@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const { HostedModel } = require("@runwayml/hosted-models");
 
-export default function Marquee() {
+export default function HostModel() {
   const [generatedText, setGeneratedText] = useState("");
   const [inputText, setInputText] = useState("");
 
