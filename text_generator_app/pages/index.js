@@ -17,7 +17,7 @@ export default function Home() {
       <main className="text-center">
         <div className="w-full h-96 flex items-center">
           <img
-            className="w-full h-32 object-contain drake"
+            className="mx-auto h-32 object-contain drake"
             src="/images/draikewglasses.png"
           />
         </div>
@@ -50,8 +50,7 @@ export default function Home() {
         }
 
         .drake:hover {
-          animation: spin 1s ease-in-out infinte;
-          background: red;
+          animation: spin 0.7s ease-in-out;
         }
       `}</style>
     </div>

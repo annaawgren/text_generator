@@ -7,8 +7,8 @@ export default function HostModel() {
   const [inputText, setInputText] = useState("");
 
   const model = new HostedModel({
-    url: "https://apply-like-drake-195b0986.hosted-models.runwayml.cloud/v1/",
-    token: "KoHW7jdeyJqe5U6Vy98ANw==",
+    url: "https://draike-text-generator.hosted-models.runwayml.cloud/v1/",
+    token: "7prYnATYJIxYLIxHRlvbnw==",
   });
 
   const handleClick = () => {
