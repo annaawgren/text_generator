@@ -21,7 +21,10 @@ export default function Home() {
             src="/images/draikewglasses.png"
           />
         </div>
-        <h1 className="text-4xl">DrAIke rapplication</h1>
+        <h1 className="text-4xl">
+          Dr<span className="text-red-300">ai</span>ke job{" "}
+          <span className="text-red-300">rap</span>plication
+        </h1>
 
         <HostedModel />
       </main>
