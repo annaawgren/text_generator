@@ -9,21 +9,6 @@ export default function Layout({ children }) {
             src: url("/fonts/soehne-breit-test-buch.woff") format("woff"),
               url("/fonts/SöhneBreitTest-Bucht.otf") format("otf");
           }
-          @font-face {
-            font-family: "Ivar-display";
-            src: url("/fonts/IvarDisplayCondensed-SemiBold.woff") format("woff"),
-              url("/fonts/IvarDisplayCondensed-SemiBold.otf") format("otf");
-          }
-          @font-face {
-            font-family: "Ivar-fine-light";
-            src: url("/fonts/IvarFine-Light.woff") format("woff"),
-              url("/fonts/IvarFine-Light.otf") format("otf");
-          }
-          @font-face {
-            font-family: "Ivar-fine-light-italic";
-            src: url("/fonts/IvarFine-LightItalic.woff") format("woff"),
-              url("/fonts/IvarFine-LightItalic.otf") format("otf");
-          }
 
           @font-face {
             font-family: "Untitled";
@@ -77,31 +62,7 @@ export default function Layout({ children }) {
           }
           .ivar-heading {
             font-family: "Ivar-display";
-          }
-          .ivar-light {
-            font-family: "Ivar-fine-light";
-          }
-          .ivar-lightIta {
-            font-family: "Ivar-fine-light-italic";
-          }
-          .untitled-text {
-            font-family: "Untitled";
-          }
-
-          .biggestfont {
-            font-size: clamp(4rem, 10vw, 8rem);
-            line-height: 1;
-          }
-
-          .bigfont {
-            font-size: clamp(2.7rem, 8vw, 5rem);
-            line-height: 1.1;
-          }
-
-          .mediumfont {
-            font-size: clamp(0.2rem, 8vw, 2.2rem);
-            line-height: 1;
-          }
+          
 
           .plusfont {
             font-size: clamp(2.5rem, 8vw, 8rem);

@@ -7,22 +7,23 @@ export default function HostModel() {
   const [inputText, setInputText] = useState("");
 
   const model = new HostedModel({
-    url: "https://draike-text-generator.hosted-models.runwayml.cloud/v1/",
-    token: "7prYnATYJIxYLIxHRlvbnw==",
+    url: "https://job-rapplication.hosted-models.runwayml.cloud/v1/",
+    token: "dMvkpYOpVcS9/jgCJc6i7w==",
   });
 
   const handleClick = () => {
     console.log("handleSubmit");
     //värde att fråga model efter
     console.log("inskriven text: ", inputText);
-    model.query({ prompt: inputText, max_characters: 1500 }).then((result) => {
+    model.query({ prompt: inputText, max_characters: 1100 }).then((result) => {
       console.log(result);
       setGeneratedText(result.generated_text);
     });
   };
 
   return (
-    <div className="w-full bg-blue-100 ">
+    <div className="container mx-auto mb-32 max-w-xl">
+      <p className="text-sm text-red">Fill in the form:</p>
       <form className="flex flex-col bg-red-100">
         <input
           className="bg-gray-200 shadow-inner rounded-l p-2 flex-1"
@@ -34,7 +35,7 @@ export default function HostModel() {
         />
 
         <button
-          className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r"
+          className="bg-red hover:bg-green duration-300 text-beige shadow p-10 "
           type="button"
           onClick={handleClick}
         >
