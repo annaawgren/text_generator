@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const { HostedModel } = require("@runwayml/hosted-models");
 
 export default function HostModel() {
   const [generatedText, setGeneratedText] = useState("");
-  const [inputText, setInputText] = useState("");
+  const [inputTextName, setInputTextName] = useState("");
+  const [inputTextComanyName, setInputTextCompanyName] = useState("");
+  const [inputTextJobTitle, setInputTextJobTitle] = useState("");
+  const [inputTextSkillOne, setInputTextSkillOne] = useState("");
+  const [inputTextSkillTwo, setInputTextSkillTwo] = useState("");
+  const [inputTextSkillThree, setInputTextSkillThree] = useState("");
 
   const model = new HostedModel({
     url: "https://job-rapplication.hosted-models.runwayml.cloud/v1/",
@@ -14,12 +19,46 @@ export default function HostModel() {
   const handleClick = () => {
     console.log("handleSubmit");
     //värde att fråga model efter
-    console.log("inskriven text: ", inputText);
-    model.query({ prompt: inputText, max_characters: 1100 }).then((result) => {
-      console.log(result);
-      setGeneratedText(result.generated_text);
-    });
+
+    const queryText = `Yo ${inputTextComanyName}, 
+    Ima applyin' for the position as a ${inputTextJobTitle}. 
+    Ima skilled in ${inputTextSkillOne}, ${inputTextSkillTwo} and ${inputTextSkillThree}. `;
+
+    const additionalDrakeIntros = [
+      "Started from the bottom homie ",
+      "Call me on my cell phone baby ",
+      "I've been down so long ya gotta ",
+      "I got my eyes on you ",
+      "It's hard to do these things alone shawty ",
+      "Ever since I left the city love ",
+      "Money over everything! Money on my mind! ",
+      "They know, they know, they know momma ",
+      "I'm on my worst behavior ",
+      "They wishin' on me ",
+      "Soon as you see the text, reply me ",
+      "I think I'd lie for you, I think I'd die for you ",
+      "I don't know how to talk to you ",
+      "Last night, I came to a realization ",
+    ];
+
+    let randomDrakeIntro =
+      additionalDrakeIntros[
+        Math.floor(Math.random() * additionalDrakeIntros.length)
+      ];
+
+    console.log("inskriven text: ", queryText);
+    console.log(randomDrakeIntro);
+
+    let queryTextToModel = queryText + randomDrakeIntro;
+
+    model
+      .query({ prompt: queryTextToModel, max_characters: 1100 })
+      .then((result) => {
+        setGeneratedText(result.generated_text);
+      });
   };
+
+  const yoursSincerely = `${inputTextName}`;
 
   return (
     <div className="container mx-auto mb-32 max-w-xl form-container">
@@ -28,88 +67,76 @@ export default function HostModel() {
       <form className="flex flex-col">
         <p className="text-md text-beige mb-2">My name is</p>
         <input
-          className="bg-gray-200 py-8 pl-4 "
+          className="bg-gray-200 py-4 pl-4 "
           id="text"
           type="text"
-          value={inputText}
+          value={inputTextName}
           placeholder="my name"
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={(e) => setInputTextName(e.target.value)}
         />
 
         <div className="w-full h-20" />
 
         <p className="text-md text-beige mb-2">I'm applying for a job at</p>
         <input
-          className="bg-gray-200 py-8 pl-4 "
+          className="bg-gray-200 py-4 pl-4 "
           id="text"
           type="text"
-          value={inputText}
-          placeholder="your first and family name"
-          onChange={(e) => setInputText(e.target.value)}
-        />
-
-        <div className="w-full h-20" />
-
-        <p className="text-md text-beige mb-2">I'm applying for a job at</p>
-        <input
-          className="bg-gray-200 py-8 pl-4 flex-1"
-          id="text"
-          type="text"
-          value={inputText}
+          value={inputTextComanyName}
           placeholder="company name"
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={(e) => setInputTextCompanyName(e.target.value)}
         />
 
         <div className="w-full h-20" />
 
         <p className="text-md text-beige mb-2">... for a position as</p>
         <input
-          className="bg-gray-200 py-8 pl-4 flex-1"
+          className="bg-gray-200 py-4 pl-4 flex-1"
           id="text"
           type="text"
-          value={inputText}
+          value={inputTextJobTitle}
           placeholder="job title"
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={(e) => setInputTextJobTitle(e.target.value)}
         />
 
         <div className="w-full h-20" />
 
         <p className="text-md text-beige mb-2">My top three skills are</p>
         <input
-          className="bg-gray-200 py-8 pl-4 "
+          className="bg-gray-200 py-4 pl-4 "
           id="text"
           type="text"
-          value={inputText}
+          value={inputTextSkillOne}
           placeholder="skill 1"
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={(e) => setInputTextSkillOne(e.target.value)}
         />
 
         <div className="w-full h-10" />
 
         <input
-          className="bg-gray-200 py-8 pl-4 "
+          className="bg-gray-200 py-4 pl-4 "
           id="text"
           type="text"
-          value={inputText}
+          value={inputTextSkillTwo}
           placeholder="skill 2"
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={(e) => setInputTextSkillTwo(e.target.value)}
         />
 
         <div className="w-full h-10" />
 
         <input
-          className="bg-gray-200 py-8 pl-4 "
+          className="bg-gray-200 py-4 pl-4 "
           id="text"
           type="text"
-          value={inputText}
+          value={inputTextSkillThree}
           placeholder="skill 3"
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={(e) => setInputTextSkillThree(e.target.value)}
         />
 
         <div className="w-full h-20" />
 
         <button
-          className="bg-red hover:bg-green hover:shadow-sm duration-300 shadow text-beige p-10 "
+          className="bg-red hover:bg-beige hover:text-red hover:shadow-sm duration-300 shadow text-beige p-10 "
           type="button"
           onClick={handleClick}
         >
@@ -120,11 +147,17 @@ export default function HostModel() {
       <div className="w-full h-40" />
 
       <div className="container mx-auto mb-32 max-w-xl bg-beige">
-        <p className="generated-tex-box">{generatedText}</p>
+        <p className="generated-text-box text-md px-5 md:px-10 pb-10 leading-loose">
+          {generatedText}
+        </p>
+        <p className="px-5 md:px-10 leading-loose text-md">Yours sincerely,</p>
+        <p className="px-5 md:px-10 pb-20 leading-loose text-md">
+          {yoursSincerely}
+        </p>
       </div>
 
       <button
-        className="button-secondary w-full bg-transparent border-2 border-beige hover:bg-beige hover:text-green hover:shadow-sm duration-300 shadow text-beige p-10 "
+        className="button-secondary w-full bg-transparent border-2 hover:border-8 border-beige hover:shadow-sm duration-300 shadow text-beige p-10 mb-2"
         type="button"
       >
         Copy text
@@ -135,10 +168,10 @@ export default function HostModel() {
           font-family: "Press Start 2P", cursive;
         }
         .form-container {
-          height: 200rem;
+          height: auto;
         }
-        .generated-tex-box {
-          height: 80rem;
+        .generated-text-box {
+          min-height: 80rem;
         }
       `}</style>
     </div>

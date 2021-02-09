@@ -33,13 +33,13 @@ module.exports = {
   textSizes: {
     sm: "8px",
     md: {
-      min: "12px",
+      min: "10px",
       max: "14px",
       minvw: "320px",
       maxvw: "1280px",
     },
     lg: {
-      min: "12px",
+      min: "14px",
       max: "20px",
       minvw: "320px",
       maxvw: "1280px",
