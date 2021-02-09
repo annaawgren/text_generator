@@ -22,29 +22,125 @@ export default function HostModel() {
   };
 
   return (
-    <div className="container mx-auto mb-32 max-w-xl">
-      <p className="text-sm text-red">Fill in the form:</p>
-      <form className="flex flex-col bg-red-100">
+    <div className="container mx-auto mb-32 max-w-xl form-container">
+      <p className="text-md text-red mb-4">Fill the form!</p>
+
+      <form className="flex flex-col">
+        <p className="text-md text-beige mb-2">My name is</p>
         <input
-          className="bg-gray-200 shadow-inner rounded-l p-2 flex-1"
+          className="bg-gray-200 py-8 pl-4 "
           id="text"
           type="text"
           value={inputText}
-          placeholder="enter text here"
+          placeholder="my name"
           onChange={(e) => setInputText(e.target.value)}
         />
 
+        <div className="w-full h-20" />
+
+        <p className="text-md text-beige mb-2">I'm applying for a job at</p>
+        <input
+          className="bg-gray-200 py-8 pl-4 "
+          id="text"
+          type="text"
+          value={inputText}
+          placeholder="your first and family name"
+          onChange={(e) => setInputText(e.target.value)}
+        />
+
+        <div className="w-full h-20" />
+
+        <p className="text-md text-beige mb-2">I'm applying for a job at</p>
+        <input
+          className="bg-gray-200 py-8 pl-4 flex-1"
+          id="text"
+          type="text"
+          value={inputText}
+          placeholder="company name"
+          onChange={(e) => setInputText(e.target.value)}
+        />
+
+        <div className="w-full h-20" />
+
+        <p className="text-md text-beige mb-2">... for a position as</p>
+        <input
+          className="bg-gray-200 py-8 pl-4 flex-1"
+          id="text"
+          type="text"
+          value={inputText}
+          placeholder="job title"
+          onChange={(e) => setInputText(e.target.value)}
+        />
+
+        <div className="w-full h-20" />
+
+        <p className="text-md text-beige mb-2">My top three skills are</p>
+        <input
+          className="bg-gray-200 py-8 pl-4 "
+          id="text"
+          type="text"
+          value={inputText}
+          placeholder="skill 1"
+          onChange={(e) => setInputText(e.target.value)}
+        />
+
+        <div className="w-full h-10" />
+
+        <input
+          className="bg-gray-200 py-8 pl-4 "
+          id="text"
+          type="text"
+          value={inputText}
+          placeholder="skill 2"
+          onChange={(e) => setInputText(e.target.value)}
+        />
+
+        <div className="w-full h-10" />
+
+        <input
+          className="bg-gray-200 py-8 pl-4 "
+          id="text"
+          type="text"
+          value={inputText}
+          placeholder="skill 3"
+          onChange={(e) => setInputText(e.target.value)}
+        />
+
+        <div className="w-full h-20" />
+
         <button
-          className="bg-red hover:bg-green duration-300 text-beige shadow p-10 "
+          className="bg-red hover:bg-green hover:shadow-sm duration-300 shadow text-beige p-10 "
           type="button"
           onClick={handleClick}
         >
-          Generate my application!
+          Generate rapplication
         </button>
       </form>
-      <p className="h-96">{generatedText}</p>
 
-      <style jsx>{``}</style>
+      <div className="w-full h-40" />
+
+      <div className="container mx-auto mb-32 max-w-xl bg-beige">
+        <p className="generated-tex-box">{generatedText}</p>
+      </div>
+
+      <button
+        className="button-secondary w-full bg-transparent border-2 border-beige hover:bg-beige hover:text-green hover:shadow-sm duration-300 shadow text-beige p-10 "
+        type="button"
+      >
+        Copy text
+      </button>
+
+      <style jsx>{`
+        button {
+          font-family: "Press Start 2P", cursive;
+        }
+        .form-container {
+          height: 200rem;
+        }
+        .generated-tex-box {
+          height: 80rem;
+        }
+      `}</style>
     </div>
   );
 }

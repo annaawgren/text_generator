@@ -2,6 +2,12 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    boxShadow: {
+      sm: "2px 4px 0 0 rgba(239, 222, 205, 100)",
+      DEFAULT:
+        "4px 6px 0 0 rgba(239, 222, 205, 100), 4px 6px 0 0 rgba(239, 222, 205, 100)",
+    },
+
     colors: {
       green: {
         DEFAULT: "#2E5052",
@@ -25,16 +31,16 @@ module.exports = {
   ],
 
   textSizes: {
-    sm: "12px",
+    sm: "8px",
     md: {
       min: "12px",
-      max: "20px",
+      max: "14px",
       minvw: "320px",
       maxvw: "1280px",
     },
     lg: {
-      min: "26px",
-      max: "55px",
+      min: "12px",
+      max: "20px",
       minvw: "320px",
       maxvw: "1280px",
     },
