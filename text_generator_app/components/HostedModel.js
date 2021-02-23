@@ -299,8 +299,8 @@ export default function HostModel() {
         <div className="w-full h-10" />
 
         <NiceButton
-          isLoading={isSecondButtonLoading}
-          onClick={handleClickAndLoading}
+          // isLoading={isSecondButtonLoading}
+          onClick={handleClick}
         >
           Generate rapplication
         </NiceButton>
