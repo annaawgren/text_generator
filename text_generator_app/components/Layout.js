@@ -40,34 +40,6 @@ export default function Layout({ children }) {
             box-shadow: 0 0 0px 1000px #fcf9d5 inset;
             font-size: 16px;
           }
-
-          ::-webkit-scrollbar {
-            width: 8px;
-            background-color: white;
-          }
-
-          ::-webkit-scrollbar-thumb {
-            background-color: black;
-             {
-              /* background: linear-gradient(
-              190deg,
-              #ffdada 0%,
-              #f3ffda 35%,
-              #d1ffe9 100%
-            ); */
-            }
-          }
-          .soehne {
-            font-family: "Soehne";
-          }
-          .ivar-heading {
-            font-family: "Ivar-display";
-          
-
-          .plusfont {
-            font-size: clamp(2.5rem, 8vw, 8rem);
-            line-height: 1;
-          }
         `}
       </style>
     </div>

@@ -16,6 +16,11 @@ export default function Home() {
         />
       </Head>
 
+      <div className="text-center w-full fixed top-20">
+        <h1 className="text-green text-sm ">
+          DR<span className="text-red">ai</span>KE JOB RAPPLICATION
+        </h1>
+      </div>
       <Hero />
 
       <HostedModelSection />

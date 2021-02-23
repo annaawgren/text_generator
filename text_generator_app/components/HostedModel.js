@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import NiceButton from "./Button";
 
 const { HostedModel } = require("@runwayml/hosted-models");
 
@@ -196,108 +197,128 @@ export default function HostModel() {
       });
   };
 
-  const yoursSincerely = `${inputTextName}`;
+  const yoursSincerely = inputTextName;
+
+  const [isSecondButtonLoading, setIsSecondButtonLoading] = React.useState(
+    false
+  );
+  const [loadingSpeed, setLoadingSpeed] = React.useState(1);
+
+  useEffect(() => {
+    if (isSecondButtonLoading) {
+      setTimeout(() => {
+        setIsSecondButtonLoading(false);
+      }, 1000 / loadingSpeed);
+    }
+  }, [isSecondButtonLoading, loadingSpeed]);
+
+  const handleButtonLoading = () => setIsSecondButtonLoading(true);
+
+  const handleClickAndLoading = () => {
+    handleButtonLoading();
+    handleClick();
+  };
 
   return (
     <div className="container mx-auto mb-32 max-w-xl form-container">
-      <p className="text-md text-red mb-4 text-center mx-auto">
-        Fill the form!
-      </p>
-
       <form className="flex flex-col">
         <p className="text-md text-beige mb-2">My name is</p>
         <input
-          className="bg-gray-200 py-4 pl-4 "
+          className="bg-gray-200 py-6 pl-4 "
           id="text"
           type="text"
           value={inputTextName}
-          placeholder="my name"
+          placeholder="Your first and last name"
           onChange={(e) => setInputTextName(e.target.value)}
+          required
         />
 
-        <div className="w-full h-20" />
+        <div className="w-full h-14 md:h-20" />
 
         <p className="text-md text-beige mb-2">I'm applying for a job at</p>
         <input
-          className="bg-gray-200 py-4 pl-4 "
+          className="bg-gray-200 py-6 pl-4 "
           id="text"
           type="text"
           value={inputTextComanyName}
-          placeholder="company name"
+          placeholder="Company name"
           onChange={(e) => setInputTextCompanyName(e.target.value)}
+          required
         />
 
-        <div className="w-full h-20" />
+        <div className="w-full h-14 md:h-20" />
 
         <p className="text-md text-beige mb-2">... for a position as</p>
         <input
-          className="bg-gray-200 py-4 pl-4 flex-1"
+          className="bg-gray-200 py-6 pl-4 flex-1"
           id="text"
           type="text"
           value={inputTextJobTitle}
-          placeholder="job title"
+          placeholder="Job title"
           onChange={(e) => setInputTextJobTitle(e.target.value)}
+          required
         />
 
-        <div className="w-full h-20" />
+        <div className="w-full h-14 md:h-20" />
 
         <p className="text-md text-beige mb-2">My top three skills are</p>
         <input
-          className="bg-gray-200 py-4 pl-4 "
+          className="bg-gray-200 py-6 pl-4 "
           id="text"
           type="text"
           value={inputTextSkillOne}
-          placeholder="skill 1"
+          placeholder="Skill 1"
           onChange={(e) => setInputTextSkillOne(e.target.value)}
+          required
         />
 
         <div className="w-full h-10" />
 
         <input
-          className="bg-gray-200 py-4 pl-4 "
+          className="bg-gray-200 py-6 pl-4 "
           id="text"
           type="text"
           value={inputTextSkillTwo}
-          placeholder="skill 2"
+          placeholder="Skill 2"
           onChange={(e) => setInputTextSkillTwo(e.target.value)}
+          required
         />
 
         <div className="w-full h-10" />
 
         <input
-          className="bg-gray-200 py-4 pl-4 "
+          className="bg-gray-200 py-6 pl-4 "
           id="text"
           type="text"
           value={inputTextSkillThree}
-          placeholder="skill 3"
+          placeholder="Skill 3"
           onChange={(e) => setInputTextSkillThree(e.target.value)}
+          required
         />
 
-        <div className="w-full h-20" />
+        <div className="w-full h-10" />
 
-        <button
-          className="bg-red hover:bg-beige hover:text-red hover:shadow-sm duration-300 shadow text-beige p-10 "
-          type="button"
-          onClick={handleClick}
+        <NiceButton
+          isLoading={isSecondButtonLoading}
+          onClick={handleClickAndLoading}
         >
           Generate rapplication
-        </button>
+        </NiceButton>
       </form>
 
       <div className="w-full h-40" />
 
-      <div className="container mx-auto mb-32 max-w-xl bg-beige">
+      <div className="container mx-auto mb-10 max-w-xl bg-beige">
         <p className="generated-text-box text-md py-10 px-5 md:px-10 leading-loose">
           {generatedText}
         </p>
-        <p className="px-5 md:px-10 leading-loose text-md">Yours sincerely,</p>
         <p className="px-5 md:px-10 pb-20 leading-loose text-md">
           {yoursSincerely}
         </p>
       </div>
 
       <button
-        className="button-secondary w-full bg-transparent border-2 hover:border-8 border-beige hover:shadow-sm duration-300 shadow text-beige p-10 mb-2"
+        className="button-secondary w-full bg-transparent border-2 hover:border-8 border-beige hover:shadow-sm duration-300 shadow text-beige text-sm p-8 "
         type="button"
       >
         Copy text
@@ -311,7 +332,40 @@ export default function HostModel() {
           height: auto;
         }
         .generated-text-box {
-          min-height: 80rem;
+          min-height: 50rem;
+        }
+
+        input[type="text"],
+        textarea {
+          color: #2e5052;
+          background-color: #efdecd;
+        }
+
+        input:focus {
+          outline: none !important;
+          border-color: red;
+          box-shadow: 0 0 0;
+        }
+        textarea:focus {
+          outline: none !important;
+          border-color: red;
+          box-shadow: 0 0 0;
+        }
+
+        ::placeholder {
+          /* Chrome, Firefox, Opera, Safari 10.1+ */
+          color: #2e5052;
+          opacity: 0.7; /* Firefox */
+        }
+
+        :-ms-input-placeholder {
+          /* Internet Explorer 10-11 */
+          color: #2e5052;
+        }
+
+        ::-ms-input-placeholder {
+          /* Microsoft Edge */
+          color: #2e5052;
         }
       `}</style>
     </div>
