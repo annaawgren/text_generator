@@ -318,7 +318,7 @@ export default function HostModel() {
       </div>
 
       <button
-        className="button-secondary w-full bg-transparent border-2 hover:border-8 border-beige hover:shadow-sm duration-300 shadow text-beige text-sm p-8 "
+        className="button-secondary w-full bg-transparent border-2 hover:border-8 border-beige hover:shadow-sm duration-300 shadow text-beige hover:text-red text-sm p-8 "
         type="button"
       >
         Copy text

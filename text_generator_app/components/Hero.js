@@ -20,7 +20,7 @@ export default function Hero() {
       </section>
 
       <style jsx>{`
-        @keyframes spin {
+        @keyframes zoomin {
           0% {
             transform: rotate(0deg);
           }
@@ -29,8 +29,25 @@ export default function Hero() {
           }
         }
 
+        @keyframes rotate {
+          0% {
+            transform: rotate(360deg) scale(2);
+          }
+          100% {
+            transform: rotate(720deg) scale(2);
+          }
+        }
+
+        {/* .drake {
+          transition: transform 0.5s linear;
+        } */}
         .drake:hover {
-          animation: spin 0.7s ease-in-out infinite;
+          animation-name: zoomin, rotate;
+          animation-duration: 1.25s;
+          animation-timing-function: linear;
+          animation-iteration-count: 1, infinite;
+          animation-fill-mode: forwards;
+          animation-delay: 0s, 1.25s;
         }
       `}</style>
     </>
