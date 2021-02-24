@@ -188,36 +188,37 @@ export default function HostModel() {
     console.log("inskriven text: ", queryText);
     console.log(randomDrakeIntro);
 
+    setIsSecondButtonLoading(true);
+
     let queryTextToModel = queryText + randomDrakeIntro;
 
     model
       .query({ prompt: queryTextToModel, max_characters: 900 })
       .then((result) => {
         setGeneratedText(result.generated_text);
+        setIsSecondButtonLoading(false);
       });
   };
 
   const yoursSincerely = inputTextName;
 
-  const [isSecondButtonLoading, setIsSecondButtonLoading] = React.useState(
-    false
-  );
-  const [loadingSpeed, setLoadingSpeed] = React.useState(1);
+  const [isSecondButtonLoading, setIsSecondButtonLoading] = useState(false);
+  const [loadingSpeed, setLoadingSpeed] = useState(1);
 
-  useEffect(() => {
-    if (isSecondButtonLoading) {
-      setTimeout(() => {
-        setIsSecondButtonLoading(false);
-      }, 1000 / loadingSpeed);
-    }
-  }, [isSecondButtonLoading, loadingSpeed]);
+  // useEffect(() => {
+  //   if (isSecondButtonLoading) {
+  //     setTimeout(() => {
+  //       setIsSecondButtonLoading(false);
+  //     }, 1000 / loadingSpeed);
+  //   }
+  // }, [isSecondButtonLoading, loadingSpeed]);
 
-  const handleButtonLoading = () => setIsSecondButtonLoading(true);
+  // const handleButtonLoading = () => setIsSecondButtonLoading(true);
 
-  const handleClickAndLoading = () => {
-    handleButtonLoading();
-    handleClick();
-  };
+  // const handleClickAndLoading = () => {
+  //   handleButtonLoading();
+  //   handleClick();
+  // };
 
   return (
     <div className="container mx-auto mb-32 max-w-xl form-container">
@@ -298,10 +299,7 @@ export default function HostModel() {
 
         <div className="w-full h-10" />
 
-        <NiceButton
-          // isLoading={isSecondButtonLoading}
-          onClick={handleClick}
-        >
+        <NiceButton isLoading={isSecondButtonLoading} onClick={handleClick}>
           Generate rapplication
         </NiceButton>
       </form>
