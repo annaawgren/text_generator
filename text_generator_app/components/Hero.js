@@ -38,10 +38,9 @@ export default function Hero() {
           }
         }
 
-        .drake {
-          xoutline: 1px solid red;
+        {/* .drake {
           transition: transform 0.5s linear;
-        }
+        } */}
         .drake:hover {
           animation-name: zoomin, rotate;
           animation-duration: 1.25s;
