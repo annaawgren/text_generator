@@ -188,7 +188,7 @@ export default function HostModel() {
     console.log("inskriven text: ", queryText);
     console.log(randomDrakeIntro);
 
-    setIsSecondButtonLoading(true);
+    setIsGenerateButtonLoading(true);
 
     let queryTextToModel = queryText + randomDrakeIntro;
 
@@ -196,14 +196,14 @@ export default function HostModel() {
       .query({ prompt: queryTextToModel, max_characters: 900 })
       .then((result) => {
         setGeneratedText(result.generated_text);
-        setIsSecondButtonLoading(false);
+        setIsGenerateButtonLoading(false);
       });
   };
 
   const yoursSincerely = inputTextName;
 
-  const [isSecondButtonLoading, setIsSecondButtonLoading] = useState(false);
-  const [loadingSpeed, setLoadingSpeed] = useState(1);
+  const [isGenerateButtonLoading, setIsGenerateButtonLoading] = useState(false);
+  // const [loadingSpeed, setLoadingSpeed] = useState(1);
 
   // useEffect(() => {
   //   if (isSecondButtonLoading) {
@@ -299,7 +299,7 @@ export default function HostModel() {
 
         <div className="w-full h-10" />
 
-        <NiceButton isLoading={isSecondButtonLoading} onClick={handleClick}>
+        <NiceButton isLoading={isGenerateButtonLoading} onClick={handleClick}>
           Generate rapplication
         </NiceButton>
       </form>
