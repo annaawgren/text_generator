@@ -195,9 +195,43 @@ export default function HostModel() {
     model
       .query({ prompt: queryTextToModel, max_characters: 900 })
       .then((result) => {
-        setGeneratedText(result.generated_text);
+        let text = formatGeneratedText(result.generated_text);
+        console.log("text is", text);
+        text = text.split(". ");
+        let texts = chunkArray(text, 3);
+
+        let finalText = "";
+        texts.forEach((textarr) => {
+          finalText =
+            finalText +
+            "<p class='text-md py-10 px-5 md:px-10 leading-loose'>";
+          textarr.forEach((para) => {
+            finalText = `${finalText} ${para}.`;
+          });
+          finalText = finalText + "</p>";
+        });
+
+        console.log({ finalText });
+
+        setGeneratedText(finalText);
         setIsGenerateButtonLoading(false);
       });
+  };
+
+  // Function from
+  // https://www.w3resource.com/javascript-exercises/fundamental/javascript-fundamental-exercise-265.php
+  const chunkArray = (arr, size) =>
+    Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+      arr.slice(i * size, i * size + size)
+    );
+
+  /**
+   * Format the generated text by splitting it into paragraphs and maybe more.
+   *
+   * @param {string} text
+   */
+  const formatGeneratedText = (text) => {
+    return text;
   };
 
   const yoursSincerely = inputTextName;
@@ -308,9 +342,12 @@ export default function HostModel() {
 
       <p className="text-md text-beige mb-2">Created with love and ai</p>
       <div className="container mx-auto mb-10 max-w-xl bg-beige">
-        <p className="generated-text-box text-md py-10 px-5 md:px-10 leading-loose">
-          {generatedText}
-        </p>
+        <div
+          className="generated-text-box"
+          dangerouslySetInnerHTML={{
+            __html: generatedText,
+          }}
+        ></div>
         <p className="px-5 md:px-10 pb-20 leading-loose text-md">
           {yoursSincerely}
         </p>
