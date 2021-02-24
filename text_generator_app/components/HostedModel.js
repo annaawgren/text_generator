@@ -308,6 +308,7 @@ export default function HostModel() {
 
       <div className="w-full h-40" />
 
+      <p className="text-md text-beige mb-2">Created with love and ai</p>
       <div className="container mx-auto mb-10 max-w-xl bg-beige">
         <p className="generated-text-box text-md py-10 px-5 md:px-10 leading-loose">
           {generatedText}

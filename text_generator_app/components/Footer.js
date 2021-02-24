@@ -68,7 +68,7 @@ export default function Footer(props) {
         )}
 
         <button
-          className="outline-none focus:outline-none text-green hover:text-red duration-300 shadow"
+          className="outline-none focus:outline-none text-beige hover:text-red duration-300 "
           onClick={handleOpen}
         >
           About
