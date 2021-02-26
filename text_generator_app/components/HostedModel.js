@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import NiceButton from "./Button";
 
 const { HostedModel } = require("@runwayml/hosted-models");
@@ -11,6 +11,9 @@ export default function HostModel() {
   const [inputTextSkillOne, setInputTextSkillOne] = useState("");
   const [inputTextSkillTwo, setInputTextSkillTwo] = useState("");
   const [inputTextSkillThree, setInputTextSkillThree] = useState("");
+  const [isGenerateButtonLoading, setIsGenerateButtonLoading] = useState(false);
+
+  const generatedElmRef = useRef(null);
 
   const model = new HostedModel({
     url: "https://job-rapplication.hosted-models.runwayml.cloud/v1/",
@@ -203,8 +206,7 @@ export default function HostModel() {
         let finalText = "";
         texts.forEach((textarr) => {
           finalText =
-            finalText +
-            "<p class='text-md py-10 px-5 md:px-10 leading-loose'>";
+            finalText + "<p class='text-md py-10 px-5 md:px-10 leading-loose'>";
           textarr.forEach((para) => {
             finalText = `${finalText} ${para}.`;
           });
@@ -215,6 +217,9 @@ export default function HostModel() {
 
         setGeneratedText(finalText);
         setIsGenerateButtonLoading(false);
+
+        // Scroll down to generated text.
+        generatedElmRef.current.scrollIntoView({ behavior: "smooth" });
       });
   };
 
@@ -233,26 +238,6 @@ export default function HostModel() {
   const formatGeneratedText = (text) => {
     return text;
   };
-
-  const yoursSincerely = inputTextName;
-
-  const [isGenerateButtonLoading, setIsGenerateButtonLoading] = useState(false);
-  // const [loadingSpeed, setLoadingSpeed] = useState(1);
-
-  // useEffect(() => {
-  //   if (isSecondButtonLoading) {
-  //     setTimeout(() => {
-  //       setIsSecondButtonLoading(false);
-  //     }, 1000 / loadingSpeed);
-  //   }
-  // }, [isSecondButtonLoading, loadingSpeed]);
-
-  // const handleButtonLoading = () => setIsSecondButtonLoading(true);
-
-  // const handleClickAndLoading = () => {
-  //   handleButtonLoading();
-  //   handleClick();
-  // };
 
   return (
     <div className="container mx-auto mb-32 max-w-xl form-container">
@@ -340,7 +325,9 @@ export default function HostModel() {
 
       <div className="w-full h-40" />
 
-      <p className="text-md text-beige mb-2">Created with love and ai</p>
+      <p className="text-md text-beige mb-2" ref={generatedElmRef}>
+        Created with love and ai
+      </p>
       <div className="container mx-auto mb-10 max-w-xl bg-beige">
         <div
           className="generated-text-box"
@@ -349,7 +336,7 @@ export default function HostModel() {
           }}
         ></div>
         <p className="px-5 md:px-10 pb-20 leading-loose text-md">
-          {yoursSincerely}
+          {inputTextName}
         </p>
       </div>
 
