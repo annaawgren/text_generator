@@ -12,6 +12,7 @@ export default function HostModel() {
   const [inputTextSkillTwo, setInputTextSkillTwo] = useState("");
   const [inputTextSkillThree, setInputTextSkillThree] = useState("");
   const [isGenerateButtonLoading, setIsGenerateButtonLoading] = useState(false);
+  const [copiedTextText, setCopiedTextText] = useState("Copy text");
 
   const generatedElmRef = useRef(null);
 
@@ -239,6 +240,21 @@ export default function HostModel() {
     return text;
   };
 
+  const handleCopyText = (evt) => {
+    // Make plain text from HTML.
+    var divContainer = document.createElement("div");
+    divContainer.innerHTML = generatedText;
+    const plainText = divContainer.textContent || divContainer.innerText || "";
+
+    navigator.clipboard.writeText(plainText).then(() => {
+      setCopiedTextText("Copied!");
+
+      setTimeout(() => {
+        setCopiedTextText("Copy text");
+      }, 2000);
+    });
+  };
+
   return (
     <div className="container mx-auto mb-32 max-w-xl form-container">
       <form className="flex flex-col">
@@ -343,8 +359,9 @@ export default function HostModel() {
       <button
         className="button-secondary w-full bg-transparent border-2 hover:border-8 border-beige hover:shadow-sm duration-300 shadow text-beige hover:text-red text-sm p-8 "
         type="button"
+        onClick={handleCopyText}
       >
-        Copy text
+        {copiedTextText}
       </button>
 
       <style jsx>{`
