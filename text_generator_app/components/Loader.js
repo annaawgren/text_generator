@@ -3,24 +3,41 @@ import React from "react";
 export default function Loader(props) {
   return (
     <div className="loader">
-      rapplicatin ...
+      <div></div>
+      <div></div>
+      <div></div>
       <style jsx>{`
         @keyframes load {
           0% {
-            transform: rotate(0deg);
+            transform: scale(0);
           }
+          50% {
+            transform: scale(1);
+          }
+          70%,
           100% {
-            transform: rotate(360deg);
+            transform: scale(0);
           }
         }
 
-        .loader {
-          border: 4px solid rgba(255, 255, 255, 0.2);
-          border-left: 4px solid;
-          animation: load 1s infinite linear;
-          border-radius: 50%;
+        .loader > div {
+          animation: load infinite linear;
+          animation-delay: 0.25s;
+          animation-duration: 2s;
+          animation-fill-mode: both;
+          display: inline-block;
+          background-color: #000;
           width: 25px;
           height: 25px;
+        }
+
+        .loader > div:nth-child(1) {
+        }
+        .loader > div:nth-child(2) {
+          animation-delay: 0.5s;
+        }
+        .loader > div:nth-child(3) {
+          animation-delay: .75s;
         }
       `}</style>
     </div>
