@@ -59,7 +59,7 @@ export default function Footer(props) {
                     >
                       Newbie Tech Exploration Lab
                     </a>
-                    , made with OpenAI's GTP-2 and ML Runway.
+                    , made with OpenAI's GPT-2 and ML Runway.
                   </p>
                 </div>
               </div>
