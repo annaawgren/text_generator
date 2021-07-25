@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import NiceButton from "./Button";
 
 const { HostedModel } = require("@runwayml/hosted-models");
@@ -11,6 +11,10 @@ export default function HostModel() {
   const [inputTextSkillOne, setInputTextSkillOne] = useState("");
   const [inputTextSkillTwo, setInputTextSkillTwo] = useState("");
   const [inputTextSkillThree, setInputTextSkillThree] = useState("");
+  const [isGenerateButtonLoading, setIsGenerateButtonLoading] = useState(false);
+  const [copiedTextText, setCopiedTextText] = useState("Copy text");
+
+  const generatedElmRef = useRef(null);
 
   const model = new HostedModel({
     url: "https://job-rapplication.hosted-models.runwayml.cloud/v1/",
@@ -188,35 +192,67 @@ export default function HostModel() {
     console.log("inskriven text: ", queryText);
     console.log(randomDrakeIntro);
 
+    setIsGenerateButtonLoading(true);
+
     let queryTextToModel = queryText + randomDrakeIntro;
 
     model
       .query({ prompt: queryTextToModel, max_characters: 900 })
       .then((result) => {
-        setGeneratedText(result.generated_text);
+        let text = formatGeneratedText(result.generated_text);
+        console.log("text is", text);
+        text = text.split(". ");
+        let texts = chunkArray(text, 3);
+
+        let finalText = "";
+        texts.forEach((textarr) => {
+          finalText =
+            finalText + "<p class='text-md py-10 px-5 md:px-10 leading-loose'>";
+          textarr.forEach((para) => {
+            finalText = `${finalText} ${para}.`;
+          });
+          finalText = finalText + "</p>";
+        });
+
+        console.log({ finalText });
+
+        setGeneratedText(finalText);
+        setIsGenerateButtonLoading(false);
+
+        // Scroll down to generated text.
+        generatedElmRef.current.scrollIntoView({ behavior: "smooth" });
       });
   };
 
-  const yoursSincerely = inputTextName;
+  // Function from
+  // https://www.w3resource.com/javascript-exercises/fundamental/javascript-fundamental-exercise-265.php
+  const chunkArray = (arr, size) =>
+    Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+      arr.slice(i * size, i * size + size)
+    );
 
-  const [isSecondButtonLoading, setIsSecondButtonLoading] = React.useState(
-    false
-  );
-  const [loadingSpeed, setLoadingSpeed] = React.useState(1);
+  /**
+   * Format the generated text by splitting it into paragraphs and maybe more.
+   *
+   * @param {string} text
+   */
+  const formatGeneratedText = (text) => {
+    return text;
+  };
 
-  useEffect(() => {
-    if (isSecondButtonLoading) {
+  const handleCopyText = (evt) => {
+    // Make plain text from HTML.
+    var divContainer = document.createElement("div");
+    divContainer.innerHTML = generatedText;
+    const plainText = divContainer.textContent || divContainer.innerText || "";
+
+    navigator.clipboard.writeText(plainText).then(() => {
+      setCopiedTextText("Copied!");
+
       setTimeout(() => {
-        setIsSecondButtonLoading(false);
-      }, 1000 / loadingSpeed);
-    }
-  }, [isSecondButtonLoading, loadingSpeed]);
-
-  const handleButtonLoading = () => setIsSecondButtonLoading(true);
-
-  const handleClickAndLoading = () => {
-    handleButtonLoading();
-    handleClick();
+        setCopiedTextText("Copy text");
+      }, 2000);
+    });
   };
 
   return (
@@ -298,31 +334,34 @@ export default function HostModel() {
 
         <div className="w-full h-10" />
 
-        <NiceButton
-          // isLoading={isSecondButtonLoading}
-          onClick={handleClick}
-        >
+        <NiceButton isLoading={isGenerateButtonLoading} onClick={handleClick}>
           Generate rapplication
         </NiceButton>
       </form>
 
       <div className="w-full h-40" />
 
-      <p className="text-md text-beige mb-2">Created with love and ai</p>
+      <p className="text-md text-beige mb-2" ref={generatedElmRef}>
+        Created with love and ai
+      </p>
       <div className="container mx-auto mb-10 max-w-xl bg-beige">
-        <p className="generated-text-box text-md py-10 px-5 md:px-10 leading-loose">
-          {generatedText}
-        </p>
+        <div
+          className="generated-text-box"
+          dangerouslySetInnerHTML={{
+            __html: generatedText,
+          }}
+        ></div>
         <p className="px-5 md:px-10 pb-20 leading-loose text-md">
-          {yoursSincerely}
+          {inputTextName}
         </p>
       </div>
 
       <button
         className="button-secondary w-full bg-transparent border-2 hover:border-8 border-beige hover:shadow-sm duration-300 shadow text-beige hover:text-red text-sm p-8 "
         type="button"
+        onClick={handleCopyText}
       >
-        Copy text
+        {copiedTextText}
       </button>
 
       <style jsx>{`
