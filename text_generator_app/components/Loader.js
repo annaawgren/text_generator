@@ -26,7 +26,7 @@ export default function Loader(props) {
           animation-duration: 2s;
           animation-fill-mode: both;
           display: inline-block;
-          background-color: #000;
+          background-color: #2e5052;
           width: 25px;
           height: 25px;
         }
@@ -37,7 +37,7 @@ export default function Loader(props) {
           animation-delay: 0.5s;
         }
         .loader > div:nth-child(3) {
-          animation-delay: .75s;
+          animation-delay: 0.75s;
         }
       `}</style>
     </div>

@@ -49,13 +49,13 @@ export default function NiceButton({ isLoading, children, ...props }) {
   return (
     <button
       {...props}
-      className="bg-red hover:bg-beige hover:text-red hover:shadow-sm duration-300 shadow text-beige text-sm md:text-md p-8 md:p-10 "
+      className="bg-red hover:bg-beige hover:text-red hover:shadow-sm duration-300 shadow text-beige text-sm md:text-md p-8 md:p-10 w-full focus:outline-none  "
       type="button"
       ref={ref}
       style={
         showLoader
           ? {
-              width: `${width}px`,
+              // width: `${width}px`,
               height: `${height}px`,
             }
           : {}
